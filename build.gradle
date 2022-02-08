@@ -1,0 +1,42 @@
+buildscript{
+    ext{
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.archi.study'
+version '1.0-SNAPSHOT'
+
+//어떤 원격 저장소에서 받아올지 결정
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+}
+
+/*
+
+:: 바뀐 디펜던시 추가방법 ::
+compile의 경우 하나의 모듈이 수정되면 그를 직접적, 간접적 으로 의존하고 있는 모듈이 모두 recompile된다고 합니다.
+그러나 implementation는 이를 직접적으로 의존하고있는 모듈만 recompile 됩니다.
+
+즉 implementation가 더 빠르며 API의 노출도 적어집니다.
+하나의 모듈이 수정된것을 필요한 모듈만 알 수 있으니 compile처럼 모든 모듈이 노출되는 일은 일어나지 않기 때문입니다.
+
+그리고 compile 은 deprecated 되고 api 로 대체되었다고 합니다.
+그렇기 때문에 compile을 써야하는 경우 api 를 사용하면 됩니다.
+ */
